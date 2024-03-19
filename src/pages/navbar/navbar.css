@@ -1,0 +1,8 @@
+.menu {
+  border-radius: 10px; /* Redondea las esquinas */
+  padding: 5px; /* Aumenta el espacio interior */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Sombra sutil */
+}
+.menu:hover {
+  background-color: #ffa500; /* Dorado más claro al pasar el cursor */
+}
