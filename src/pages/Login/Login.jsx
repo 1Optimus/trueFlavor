@@ -25,7 +25,7 @@ function Login(){
                 name: 'defaultName', //doesnt exist the name due to there is no backend yet
                 email: email,
             })            
-            logIn(email, user.mode)
+            logIn(email, user.mode, user.products)
             navigate("/");                           
         } catch (error) {
             alert("Couldn't login")
@@ -43,7 +43,7 @@ function Login(){
                 name: name,
                 email: email,
             })    
-            newUserCreated(email, user.mode, name)                             
+            newUserCreated(email, user.mode, name, user.products)                             
             navigate("/");                 
         } catch (error) {
             alert("Couldn't login")

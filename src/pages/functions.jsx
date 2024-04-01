@@ -8,6 +8,25 @@ function updateMode(dataUsers) {
         email: dataUsers.email,
         isSigned: dataUsers.isSigned,
         mode: newMode,
+        products: dataUsers.products,
+      })
+    );
+  } catch (error) {
+    console.log("mode", error);
+  }
+  return "";
+}
+
+function updateProducts(dataUsers) {
+  try {
+    sessionStorage.setItem(
+      "TrueFlavor",
+      JSON.stringify({
+        name: dataUsers.name,
+        email: dataUsers.email,
+        isSigned: dataUsers.isSigned,
+        mode: dataUsers.mode,
+        products: dataUsers.products,
       })
     );
   } catch (error) {
@@ -25,6 +44,7 @@ function logOutUser(mode) {
         email: "",
         isSigned: false,
         mode: mode,
+        products: [],
       })
     );
   } catch (error) {
@@ -33,7 +53,7 @@ function logOutUser(mode) {
   return "";
 }
 
-function logIn(email, mode) {
+function logIn(email, mode, products) {
   try {
     sessionStorage.setItem(
       "TrueFlavor",
@@ -42,6 +62,7 @@ function logIn(email, mode) {
         email: email,
         mode: mode,
         isSigned: true,
+        products,
       })
     );
   } catch (error) {
@@ -51,7 +72,7 @@ function logIn(email, mode) {
   return "";
 }
 
-function newUserCreated(name, mode, email) {
+function newUserCreated(name, mode, email, products) {
   try {
     sessionStorage.setItem(
       "TrueFlavor",
@@ -60,6 +81,7 @@ function newUserCreated(name, mode, email) {
         email: email,
         mode: mode,
         isSigned: true,
+        products,
       })
     );
   } catch (error) {
@@ -77,4 +99,11 @@ function getMode() {
     return "";
   }
 }
-export { updateMode, logOutUser, logIn, newUserCreated, getMode };
+export {
+  updateMode,
+  logOutUser,
+  logIn,
+  newUserCreated,
+  getMode,
+  updateProducts,
+};

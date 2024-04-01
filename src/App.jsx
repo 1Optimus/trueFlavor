@@ -18,6 +18,7 @@ function App() {
     email: "",
     mode: false,
     isSigned: false,
+    products: {},
   });
 
   const toggleDarkMode = () => {

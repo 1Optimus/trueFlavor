@@ -28,6 +28,7 @@ function Navbar() {
         isSigned: false,
         mode: false,
         email: "",
+        products: {},
       });
       navigate("/");
     } catch (error) {
@@ -37,9 +38,9 @@ function Navbar() {
   };
 
   return (
-    <nav className="flex justify-between p-4 items-center nav font-[Poppins]">
+    <nav className="p-4 nav font-[Poppins]">          
+      <ul className="hidden  md:flex  justify-around ">        
       <img className="h-16 w-25 rounded-lg" color="white" src={TrueFlavor} />
-      <ul className="hidden  md:flex gap-6">
         <NavLink
           className="menu py-3"
           to="/menu/specials"
