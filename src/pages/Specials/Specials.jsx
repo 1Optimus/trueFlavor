@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { Context } from "../../App";
 import { updateProducts } from "../functions";
 import data from "./products.json";
-import Delete from "../../assets/X.png";
+import Delete from "../../assets/delete.png";
 import More from "../../assets/more.png";
 import Less from "../../assets/less.png";
 //just for now everything is in the same file, the range is this one: 1-20 donuts, 21-40 food, 41-60 drinks
