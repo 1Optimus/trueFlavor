@@ -36,11 +36,10 @@ function Navbar() {
       console.log(error);
     }
   };
-
   return (
-    <nav className="p-4 nav font-[Poppins]">          
-      <ul className="hidden  md:flex  justify-around ">        
-      <img className="h-16 w-25 rounded-lg" color="white" src={TrueFlavor} />
+    <nav className="p-4 nav font-[Poppins]">
+      <ul className="hidden  md:flex  justify-around ">
+        <img className="h-16 w-25 rounded-lg" color="white" src={TrueFlavor} />
         <NavLink
           className="menu py-3"
           to="/menu/specials"
@@ -96,6 +95,7 @@ function Navbar() {
             <img className="h-16 w-16" src={Hamburger} />
           </li>
         </NavLink>
+
         <NavLink
           className="menu py-3"
           to="/cart"
@@ -105,8 +105,14 @@ function Navbar() {
         >
           <li>
             <img className="h-16 w-16" src={MiniCart} />
+            {Object.values(user.products).length > 0 && (
+              <span className="cart-indicator">
+                {Object.values(user.products).length}
+              </span>
+            )}
           </li>
         </NavLink>
+
         {user.isSigned == false ? (
           <Link
             className="bg-orange-300 text-white font-[Poppins] duration-500 px-6 mx-4 hover:bg-orange-500 rounded py-3 flex items-center justify-center"

@@ -6,3 +6,6 @@
 .menu:hover {
   background-color: #ffa500; /* Dorado más claro al pasar el cursor */
 }
+.menu li {
+  position: relative; /* Posicionamiento relativo */
+}

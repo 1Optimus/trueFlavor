@@ -1,5 +1,20 @@
-
-  #Allbody{    
-    height: 100vh;
-    overflow-y: scroll
-  }
+#Allbody {
+  height: 100vh;
+  overflow-y: scroll;
+}
+.cart-indicator {
+  position: absolute; 
+  top: 5px;
+  right: 5px;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background-color: red;
+  color: white;
+  font-size: 12px;
+  text-align: center;
+  line-height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -1,16 +1,18 @@
 import { useState, createContext, useEffect } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import { updateMode, getMode } from "./pages/functions";
 export const Context = createContext();
 import "./App.css";
 import Sun from "./assets/soleado.png";
 import Moon from "./assets/luna.png";
+import MiniCart from "./assets/minicart.png";
 import Specials from "./pages/Specials/Specials";
 import Cart from "./pages/cart/Cart";
 import Navbar from "./pages/navbar/Navbar";
 import Login from "./pages/Login/Login";
 
 function App() {
+  const navigate = useNavigate();
   const existentUSer = getMode();
   const [darkMode, setDarkMode] = useState(false);
   const [user, setUser] = useState({
@@ -38,7 +40,7 @@ function App() {
     } catch (error) {
       console.log("error obtaining mode", error);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -53,12 +55,24 @@ function App() {
         }}
       >
         <Navbar />
-        <Routes>          
+        <Routes>
           <Route path="/menu/:id" element={<Specials />} />
           <Route path="/login" element={<Login />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="*" element={<Specials />} />
         </Routes>
+        <button
+          title="goToCart"
+          className="md:hidden absolute w-16 bottom-4 right-0 md:bottom-16 md:right-16"
+          onClick={() => navigate("/cart")}
+        >
+          <img className="h-8 w-8" src={MiniCart} />
+          {Object.values(user.products).length > 0 && (
+            <span className="cart-indicator">
+              {Object.values(user.products).length}
+            </span>
+          )}
+        </button>
         <button
           title="mode"
           className="absolute w-16 bottom-4 left-0 md:bottom-16 md:left-16"

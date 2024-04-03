@@ -10,6 +10,9 @@ import Less from "../../assets/less.png";
 function Specials() {
   const [user, setUser] = useContext(Context);
   const [filteredProducts, setfilteredProducts] = useState(data);
+  const [showAdded, setShowAdded] = useState(false);
+  const [showDeleted, setShowDeleted] = useState(false);
+  //diferents types of products
   const donuts = data.filter((product) => product.id >= 1 && product.id <= 10);
   const cookies = data.filter((product) => product.id >= 11 && product.id <= 20);
   const drinks = data.filter((product) => product.id >= 21 && product.id <= 30);
@@ -37,6 +40,8 @@ function Specials() {
       products: currentProduct,
     });
     updateProducts(user);
+    setShowAdded(true);
+    setTimeout(() => setShowAdded(false), 2000);
   };
   const lessProduct = (idProduct) => {
     let auxProduct = user.products;
@@ -47,6 +52,8 @@ function Specials() {
           break;
         } else {
           delete auxProduct[current];
+          setShowDeleted(true);
+          setTimeout(() => setShowDeleted(false), 2000);
           break;
         }
       }
@@ -70,6 +77,8 @@ function Specials() {
       products: auxProduct,
     });
     updateProducts(user);
+    setShowDeleted(true);
+    setTimeout(() => setShowDeleted(false), 2000);
   };
 
   useEffect(() => {
@@ -135,22 +144,34 @@ function Specials() {
               key={productId}
             >
               <img
-                src={data[(productId-1)].image}
+                src={data[productId - 1].image}
                 alt="product"
-                className="w-56 h-56 object-contain place-self-center"                
+                className="w-56 h-56 object-contain place-self-center"
               />
               <div className="flex justify-around my-2">
                 <a className="text-center dark:text-white font-sans text-lg md:text-2xl">
                   #{user.products[productId]}
                 </a>
                 <button className="">
-                  <img className="h-10 w-10" src={More} onClick={() => addProduct(productId)}/>
+                  <img
+                    className="h-10 w-10"
+                    src={More}
+                    onClick={() => addProduct(productId)}
+                  />
                 </button>
                 <button className="">
-                  <img className="h-10 w-10" src={Less} onClick={() => lessProduct(productId)}/>
+                  <img
+                    className="h-10 w-10"
+                    src={Less}
+                    onClick={() => lessProduct(productId)}
+                  />
                 </button>
                 <button className="hover:bg-rose-950 rounded-full">
-                  <img className="h-10 w-10" src={Delete} onClick={() => deleteProduct(productId)}/>
+                  <img
+                    className="h-10 w-10"
+                    src={Delete}
+                    onClick={() => deleteProduct(productId)}
+                  />
                 </button>
               </div>
             </div>
@@ -167,6 +188,21 @@ function Specials() {
           </a>
         </div>
       </aside>
+
+      {showAdded && (
+        <div className="bg-green-200/60 backdrop-blur-xl z-20 max-w-md absolute right-5 top-15 rounded-lg p-6 shadow">
+          <h1 className="text-xl text-slate-700 font-medium">Product added!</h1>
+          <div className="flex justify-between items-center"></div>
+        </div>
+      )}
+      {showDeleted && (
+        <div className="bg-red-200/60 backdrop-blur-xl z-20 max-w-md absolute right-5 top-15 rounded-lg p-6 shadow">
+          <h1 className="text-xl text-slate-700 font-medium">
+            Product deleted!
+          </h1>
+          <div className="flex justify-between items-center"></div>
+        </div>
+      )}
     </div>
   );
 }
@@ -193,10 +229,6 @@ export default Specials;
               </button>
             </div>
           </div>
-
-
-
-
                   <div className="flex flex-col justify-items-center py-3">
           <img
             src="https://media.istockphoto.com/id/1467339432/video/retro-buffering-circular-loading-bar-rotating-on-black-background.jpg?s=640x640&k=20&c=jOF3pEBv3EaXlgPHoa8CsOwOIg9gBNEPrXztQ_PXidQ="
