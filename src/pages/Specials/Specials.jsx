@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { Context } from "../../App";
 import { updateProducts } from "../functions";
 import data from "./products.json";
@@ -12,11 +12,16 @@ function Specials() {
   const [filteredProducts, setfilteredProducts] = useState(data);
   const [showAdded, setShowAdded] = useState(false);
   const [showDeleted, setShowDeleted] = useState(false);
+  const navigate = useNavigate();
   //diferents types of products
   const donuts = data.filter((product) => product.id >= 1 && product.id <= 10);
-  const cookies = data.filter((product) => product.id >= 11 && product.id <= 20);
+  const cookies = data.filter(
+    (product) => product.id >= 11 && product.id <= 20
+  );
   const drinks = data.filter((product) => product.id >= 21 && product.id <= 30);
-  const hamburger = data.filter((product) => product.id >= 31 && product.id <= 40);
+  const hamburger = data.filter(
+    (product) => product.id >= 31 && product.id <= 40
+  );
   const specials = data.filter((product) => product.id % 2);
   const { id } = useParams();
 
@@ -100,7 +105,7 @@ function Specials() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
   return (
-    <div className="flex flex-row">
+    <div className="flex flex-row dark:text-white font-sans text-lg font-bold text-center ">
       <article className="basis-full md:basis-4/5">
         <div className="flex flex-wrap gap-2 justify-center">
           {filteredProducts.map((product) => (
@@ -116,14 +121,13 @@ function Specials() {
                   alt="product"
                 />
                 <div className="flex flex-col w-full">
-                  <p className="dark:text-white font-sans text-lg md:text-xl font-bold text-center">
-                    {product.name}
-                  </p>
-                  <p className="text-amber-400 font-sans text-lg md:text-2xl font-bold py-1">
+                  <p className="md:text-xl">{product.name}</p>
+                  <p className="text-amber-400 md:text-2x py-1">
                     {`$${product.price}`}
                   </p>
                   <button
-                    className="middle none center mr-4 rounded-lg bg-green-500 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-green-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none "
+                    title="addToCart"
+                    className="middle none center mr-4 rounded-lg bg-green-500 py-3 px-6 text-xs uppercase text-white shadow-md shadow-green-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none "
                     data-ripple-light="true"
                     onClick={() => addProduct(product.id)}
                   >
@@ -149,24 +153,25 @@ function Specials() {
                 className="w-56 h-56 object-contain place-self-center"
               />
               <div className="flex justify-around my-2">
-                <a className="text-center dark:text-white font-sans text-lg md:text-2xl">
-                  #{user.products[productId]}
-                </a>
-                <button className="">
+                <a className="md:text-2xl">#{user.products[productId]}</a>
+                <button title="more">
                   <img
                     className="h-10 w-10"
                     src={More}
                     onClick={() => addProduct(productId)}
                   />
                 </button>
-                <button className="">
+                <button title="less">
                   <img
                     className="h-10 w-10"
                     src={Less}
                     onClick={() => lessProduct(productId)}
                   />
                 </button>
-                <button className="hover:bg-rose-950 rounded-full">
+                <button
+                  title="delete"
+                  className="hover:bg-rose-950 rounded-full"
+                >
                   <img
                     className="h-10 w-10"
                     src={Delete}
@@ -178,14 +183,16 @@ function Specials() {
           );
         })}
         <div className="flex justify-center py-3">
-          <a
-            className="group inline-block rounded-full bg-gradient-to-r from-blue-500 via-green-300 to-green-500 p-[2px] focus:outline-none focus:ring active:text-opacity-75"
-            href="#"
-          >
-            <span className="block rounded-full bg-white px-8 py-3 text-sm font-medium group-hover:bg-transparent">
-              Go to cart
-            </span>
-          </a>
+          {Object.values(user.products).length > 0 && (
+            <a
+              className="group inline-block rounded-full bg-gradient-to-r from-blue-500 via-green-300 to-green-500 p-[2px] focus:outline-none focus:ring active:text-opacity-75"
+              onClick={() => navigate("/cart")}
+            >
+              <span className="block rounded-full bg-white px-8 py-3 text-sm font-medium group-hover:bg-transparent">
+                Go to cart
+              </span>
+            </a>
+          )}
         </div>
       </aside>
 
@@ -207,48 +214,4 @@ function Specials() {
   );
 }
 export default Specials;
-/*
 
-   <div className="rounded-xl py-3 px-3 basis-full md:basis-1/3">
-            <img
-              src="https://media.istockphoto.com/id/1467339432/video/retro-buffering-circular-loading-bar-rotating-on-black-background.jpg?s=640x640&k=20&c=jOF3pEBv3EaXlgPHoa8CsOwOIg9gBNEPrXztQ_PXidQ="
-              alt="product"
-            />
-            <div className="flex flex-col p-1 md:p-2">
-              <p className="dark:text-white font-sans text-base md:text-xl font-bold text-center">
-                Pudin
-              </p>
-              <p className="text-amber-400 font-sans text-base md:text-2xl font-bold py-1">
-                Pudin
-              </p>
-              <button
-                className="middle none center mr-4 rounded-lg bg-green-500 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-green-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                data-ripple-light="true"
-              >
-                Button
-              </button>
-            </div>
-          </div>
-                  <div className="flex flex-col justify-items-center py-3">
-          <img
-            src="https://media.istockphoto.com/id/1467339432/video/retro-buffering-circular-loading-bar-rotating-on-black-background.jpg?s=640x640&k=20&c=jOF3pEBv3EaXlgPHoa8CsOwOIg9gBNEPrXztQ_PXidQ="
-            alt="product"
-            className="box-content w-9/12 place-self-center"
-          />
-          <div className="flex justify-around my-2">
-            <a className="text-center dark:text-white font-sans text-lg md:text-2xl">
-              #
-            </a>
-            <button className="hover:bg-amber-500 rounded-full">
-              <img className="h-10 w-10" src={More} />
-            </button>
-            <button className="hover:bg-amber-500 rounded-full">
-              <img className="h-10 w-10" src={Less} />
-            </button>
-            <button className="hover:bg-rose-950 rounded-full">
-              <img className="h-10 w-10" src={Delete} />
-            </button>
-          </div>
-        </div>
-
-*/
