@@ -188,7 +188,7 @@ function Specials() {
               className="group inline-block rounded-full bg-gradient-to-r from-blue-500 via-green-300 to-green-500 p-[2px] focus:outline-none focus:ring active:text-opacity-75"
               onClick={() => navigate("/cart")}
             >
-              <span className="block rounded-full bg-white px-8 py-3 text-sm font-medium group-hover:bg-transparent">
+              <span className="block rounded-full bg-white text-black px-8 py-3 text-sm font-medium group-hover:bg-transparent">
                 Go to cart
               </span>
             </a>
